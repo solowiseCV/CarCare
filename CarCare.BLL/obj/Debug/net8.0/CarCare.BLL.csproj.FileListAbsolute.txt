@@ -1,0 +1,15 @@
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\bin\Debug\net8.0\CarCare.BLL.deps.json
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\bin\Debug\net8.0\CarCare.BLL.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\bin\Debug\net8.0\CarCare.BLL.pdb
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\bin\Debug\net8.0\CarCare.Domain.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\bin\Debug\net8.0\CarCare.Domain.pdb
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\CarCare.BLL.csproj.AssemblyReference.cache
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\CarCare.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\CarCare.BLL.AssemblyInfoInputs.cache
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\CarCare.BLL.AssemblyInfo.cs
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\CarCare.BLL.csproj.CoreCompileInputs.cache
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\CarCare..D72DAE97.Up2Date
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\CarCare.BLL.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\refint\CarCare.BLL.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\CarCare.BLL.pdb
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\ref\CarCare.BLL.dll

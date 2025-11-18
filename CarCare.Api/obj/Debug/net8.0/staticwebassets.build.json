@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "fVuePbD4WVxHOsIQeaGaVCHUavZ9BcV+6Q4mo/H3fuA=",
+  "Source": "CarCare.Api",
+  "BasePath": "_content/CarCare.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

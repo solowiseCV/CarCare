@@ -1,0 +1,11 @@
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\net8.0\CarCare.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\net8.0\CarCare.Domain.AssemblyInfoInputs.cache
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\net8.0\CarCare.Domain.AssemblyInfo.cs
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\net8.0\CarCare.Domain.csproj.CoreCompileInputs.cache
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\bin\Debug\net8.0\CarCare.Domain.deps.json
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\bin\Debug\net8.0\CarCare.Domain.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\bin\Debug\net8.0\CarCare.Domain.pdb
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\net8.0\CarCare.Domain.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\net8.0\refint\CarCare.Domain.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\net8.0\CarCare.Domain.pdb
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\net8.0\ref\CarCare.Domain.dll

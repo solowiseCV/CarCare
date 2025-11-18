@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "CarCare.Domain/1.0.0": {
+        "runtime": {
+          "CarCare.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CarCare.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
