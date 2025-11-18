@@ -1,7 +1,4 @@
-using CarCare.API.DTOs.Auth.ResponseDto;
-using CarCare.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -12,43 +9,23 @@ namespace CarCare.API.Controllers
     [Authorize]
     public class UserProfileController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
+        private readonly IUserService _userService;
 
-        public UserProfileController(UserManager<User> userManager)
+        public UserProfileController(IUserService userService)
         {
-            _userManager = userManager;
+            _userService = userService;
         }
 
         [HttpGet("me")]
         public async Task<IActionResult> GetUserProfile()
         {
-            // Get user ID from JWT claims
             var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (userIdString == null)
-                return Unauthorized();
+            if (userIdString == null) return Unauthorized();
 
             var userId = Guid.Parse(userIdString);
+            var userDto = await _userService.GetCurrentUserByIdAsync(userId);
 
-            // Fetch user from database
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null)
-                return NotFound();
-
-            // Get roles
-            var roles = await _userManager.GetRolesAsync(user);
-
-            // Map to DTO
-            var userDto = new UserDto
-            {
-                Id = user.Id,
-                UserName = user.UserName,
-                Email = user.Email,
-                Name = user.Name,
-                Address = user.Address,
-                Gender = user.Gender,
-                BirthDate = user.BirthDate,
-                Roles = roles.ToArray()
-            };
+            if (userDto == null) return NotFound();
 
             return Ok(userDto);
         }

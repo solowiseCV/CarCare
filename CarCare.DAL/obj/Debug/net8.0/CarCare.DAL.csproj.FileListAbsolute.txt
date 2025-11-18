@@ -15,3 +15,4 @@ C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DAL\obj\Debug\net8
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DAL\obj\Debug\net8.0\CarCare.DAL.pdb
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DAL\obj\Debug\net8.0\CarCare.DAL.genruntimeconfig.cache
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DAL\obj\Debug\net8.0\ref\CarCare.DAL.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DAL\obj\Debug\net8.0\CarCare.DAL.sourcelink.json

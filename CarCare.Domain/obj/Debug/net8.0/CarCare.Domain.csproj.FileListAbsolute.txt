@@ -9,3 +9,4 @@ C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\n
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\net8.0\refint\CarCare.Domain.dll
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\net8.0\CarCare.Domain.pdb
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\net8.0\ref\CarCare.Domain.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Domain\obj\Debug\net8.0\CarCare.Domain.sourcelink.json

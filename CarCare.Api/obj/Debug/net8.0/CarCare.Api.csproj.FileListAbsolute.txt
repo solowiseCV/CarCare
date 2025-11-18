@@ -142,3 +142,6 @@ C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.API\bin\Debug\net8
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.API\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.API\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\obj\Debug\net8.0\CarCare.Api.sourcelink.json
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

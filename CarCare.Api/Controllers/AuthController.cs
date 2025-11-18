@@ -35,7 +35,7 @@ namespace CarCare.API.Controllers{
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded) return BadRequest(result.Errors);
            
-
+           await _userManager.AddToRoleAsync(user, "Customer");
           var token = _tokenService.CreateToken(user);
 
             return Ok(new { Token = token });
