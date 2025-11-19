@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarCare.Api", "CarCare.Api\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarCare.BLL", "CarCare.BLL\CarCare.BLL.csproj", "{45B9CD07-5604-4428-9633-B6A37FB57CFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarCare.Infrastructure", "CarCare.Infrastructure\CarCare.Infrastructure.csproj", "{1EB7F83A-D6C2-484E-8827-A6E63037070D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{45B9CD07-5604-4428-9633-B6A37FB57CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45B9CD07-5604-4428-9633-B6A37FB57CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45B9CD07-5604-4428-9633-B6A37FB57CFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EB7F83A-D6C2-484E-8827-A6E63037070D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EB7F83A-D6C2-484E-8827-A6E63037070D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EB7F83A-D6C2-484E-8827-A6E63037070D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EB7F83A-D6C2-484E-8827-A6E63037070D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using CarCare.Infrastructure.Identity.Seeds;
+using CarCare.Infrastructure.Email;
 using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,6 +55,8 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 // Add Controllers and Swagger
 builder.Services.AddControllers();

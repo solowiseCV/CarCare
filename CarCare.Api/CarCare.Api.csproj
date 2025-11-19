@@ -20,6 +20,7 @@
     <ProjectReference Include="..\CarCare.BLL\CarCare.BLL.csproj" />
     <ProjectReference Include="..\CarCare.DAL\CarCare.DAL.csproj" />
     <ProjectReference Include="..\CarCare.Domain\CarCare.Domain.csproj" />
+    <ProjectReference Include="..\CarCare.Infrastructure\CarCare.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

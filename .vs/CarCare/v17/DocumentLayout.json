@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\uches\\OneDrive\\Desktop\\full projects\\CarCare\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4A51D237-BF22-4192-9B79-B089003CAE14}|CarCare.Api\\CarCare.Api.csproj|c:\\users\\uches\\onedrive\\desktop\\full projects\\carcare\\carcare.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A51D237-BF22-4192-9B79-B089003CAE14}|CarCare.Api\\CarCare.Api.csproj|solutionrelative:carcare.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\uches\\OneDrive\\Desktop\\full projects\\CarCare\\CarCare.Api\\Program.cs",
+              "RelativeDocumentMoniker": "CarCare.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\uches\\OneDrive\\Desktop\\full projects\\CarCare\\CarCare.Api\\Program.cs",
+              "RelativeToolTip": "CarCare.Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-19T10:24:04.455Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

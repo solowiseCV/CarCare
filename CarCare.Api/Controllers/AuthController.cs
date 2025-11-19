@@ -4,7 +4,8 @@ using CarCare.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CarCare.API.Controllers{
+namespace CarCare.API.Controllers
+{
 
     [ApiController]
     [Route("api/[controller]")]
@@ -15,47 +16,61 @@ namespace CarCare.API.Controllers{
 
         private readonly ITokenService _tokenService;
 
-        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService)
+        private readonly IAuthService _authService;
+
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService, IAuthService authService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _authService = authService;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
-            var user = new User
-            {
-                UserName = registerDto.Email,
-                Email = registerDto.Email,
-                Name = registerDto.Name
-            };
-
-            var result = await _userManager.CreateAsync(user, registerDto.Password);
-            if (!result.Succeeded) return BadRequest(result.Errors);
-           
-           await _userManager.AddToRoleAsync(user, "Customer");
-          var token = _tokenService.CreateToken(user);
-
-            return Ok(new { Token = token });
+            var message = await _authService.RegisterAsync(registerDto);
+            return Ok(message);
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            var user = await _userManager.FindByEmailAsync(loginDto.Email);
-            if (user == null)
-                return Unauthorized("Invalid email or password");
-
-            var result = await _signInManager.PasswordSignInAsync(loginDto.Email, loginDto.Password, false, false);
-
-            if (!result.Succeeded)
-            {
-                return Unauthorized("Invalid email or password");
-            }
-          var token = _tokenService.CreateToken(user);
-            return Ok(new {  token });
+            var token = await _authService.LoginAsync(loginDto);
+            return Ok(new { token });
         }
+
+        [HttpPost("send-verification-email")]
+        public async Task<IActionResult> SendVerificationEmail()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user is null)
+                return Unauthorized();
+
+            await _authService.SendEmailVerificationAsync(user);
+            return Ok("Verification email sent.");
+        }
+
+        [HttpGet("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailDto dto)
+        {
+            var result = await _authService.ConfirmEmailAsync(dto.UserId, dto.Token);
+            return result ? Ok("Email confirmed.") : BadRequest("Invalid token.");
+        }
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(ForgetPasswordDto dto)
+        {
+            await _authService.ForgotPasswordAsync(dto.Email);
+            return Ok("Password reset link sent.");
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto dto)
+        {
+            var result = await _authService.ResetPasswordAsync(dto.UserId, dto.Token, dto.NewPassword);
+            return result ? Ok("Password updated.") : BadRequest("Invalid token.");
+        }
+
     }
 }

@@ -145,3 +145,8 @@ C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\obj\Debug\net8.0\CarCare.Api.sourcelink.json
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8.0\MailKit.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8.0\MimeKit.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8.0\CarCare.Infrastructure.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8.0\CarCare.Infrastructure.pdb
