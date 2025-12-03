@@ -13,7 +13,7 @@ namespace CarCare.Domain.Interfaces
         Task<bool> UpdateOrderAsync(Order order);
         Task<bool> DeleteOrderAsync(Guid id);
 
-        // OrderItem specific methods
+       
         Task<OrderItem?> GetOrderItemByIdAsync(Guid id);
         Task<OrderItem> AddOrderItemAsync(OrderItem orderItem);
         Task<bool> UpdateOrderItemAsync(OrderItem orderItem);

@@ -34,7 +34,7 @@ namespace CarCare.Domain.Entities
     [MaxLength(20)]
     public string CarYear { get; set; } = string.Empty;
 
-    // Authenticity
+
     public bool IsAuthentic { get; set; } = true;
     public string? AuthenticityCertificateUrl { get; set; }
 

@@ -4,7 +4,7 @@ using CarCare.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq; // Added for Include
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CarCare.DAL.Repositories
@@ -21,15 +21,15 @@ namespace CarCare.DAL.Repositories
         public async Task<IEnumerable<Order>> GetOrdersAsync()
         {
             return await _context.Orders
-                                 .Include(o => o.Items) // Include order items
+                                 .Include(o => o.Items) 
                                  .ToListAsync();
         }
 
         public async Task<Order?> GetOrderByIdAsync(Guid id)
         {
             return await _context.Orders
-                                 .Include(o => o.Items) // Include order items
-                                 .FirstOrDefaultAsync(o => o.Id == id); // Use FirstOrDefaultAsync for Include
+                                 .Include(o => o.Items) 
+                                 .FirstOrDefaultAsync(o => o.Id == id);
         }
 
         public async Task<Order> AddOrderAsync(Order order)
@@ -44,15 +44,14 @@ namespace CarCare.DAL.Repositories
             _context.Entry(order).State = EntityState.Modified;
             try
             {
-                // Update OrderItems if they are part of the order object and marked for update
-                // This requires careful handling of child entities (add, update, delete)
+               
                 foreach (var item in order.Items)
                 {
-                    if (item.Id == Guid.Empty) // New item
+                    if (item.Id == Guid.Empty) 
                     {
                         _context.Entry(item).State = EntityState.Added;
                     }
-                    else // Existing item, check if modified or deleted
+                    else 
                     {
                         _context.Entry(item).State = EntityState.Modified;
                     }
@@ -80,7 +79,6 @@ namespace CarCare.DAL.Repositories
             return true;
         }
 
-        // OrderItem specific methods
         public async Task<OrderItem?> GetOrderItemByIdAsync(Guid id)
         {
             return await _context.OrderItems.FindAsync(id);

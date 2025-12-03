@@ -1,6 +1,6 @@
 using AutoMapper;
 using CarCare.DAL.Entities;
-using CarCare.API.DTOs.Auth.ResponseDto;
+using CarCare.DTOs.Auth.ResponseDto;
 
 public class UserProfile : Profile
 {

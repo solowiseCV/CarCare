@@ -1,7 +1,8 @@
-using CarCare.API.DTOs.Auth.RequestDto;
+using CarCare.DTOs.Auth.RequestDto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using CarCare.BLL.Interfaces; 
 
 namespace CarCare.API.Controllers
 {

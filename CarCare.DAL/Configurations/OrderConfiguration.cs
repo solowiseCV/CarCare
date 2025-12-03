@@ -1,7 +1,7 @@
 using CarCare.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using CarCare.DAL.Entities; // Added for ApplicationUser
+using CarCare.DAL.Entities; 
 
 namespace CarCare.DAL.Configurations
 {

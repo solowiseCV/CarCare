@@ -1,6 +1,17 @@
 using CarCare.DAL;
 using CarCare.DAL.Entities;
-using CarCare.API.Services;
+using CarCare.BLL.Services;
+using CarCare.BLL.Interfaces;
+using CarCare.DTOs.Auth.RequestDto;
+using CarCare.DTOs.Auth.ResponseDto;
+using CarCare.DTOs.Customer.RequestDto;
+using CarCare.DTOs.Customer.ResponseDto;
+using CarCare.DTOs.Order.RequestDto;
+using CarCare.DTOs.Order.ResponseDto;
+using CarCare.DTOs.Product.RequestDto;
+using CarCare.DTOs.Product.ResponseDto;
+using CarCare.DTOs.Supplier.RequestDto;
+using CarCare.DTOs.Supplier.ResponseDto;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +23,7 @@ using CarCare.Infrastructure.Email;
 using AutoMapper;
 using CarCare.Domain.Interfaces;
 using CarCare.DAL.Repositories;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

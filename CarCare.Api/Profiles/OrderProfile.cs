@@ -1,6 +1,6 @@
 using AutoMapper;
-using CarCare.API.DTOS.Order.RequestDto;
-using CarCare.API.DTOS.Order.ResponseDto;
+using CarCare.DTOs.Order.RequestDto;
+using CarCare.DTOs.Order.ResponseDto;
 using CarCare.Domain.Entities;
 
 namespace CarCare.API.Profiles

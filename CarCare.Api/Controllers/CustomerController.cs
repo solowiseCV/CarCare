@@ -1,13 +1,13 @@
-using CarCare.API.DTOS.Customer.RequestDto;
-using CarCare.API.DTOS.Customer.ResponseDto;
-using CarCare.API.Services;
+using CarCare.DTOs.Customer.RequestDto;
+using CarCare.DTOs.Customer.ResponseDto;
+using CarCare.BLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CarCare.API.Controllers
+namespace CarCare.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

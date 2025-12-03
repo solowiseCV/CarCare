@@ -150,3 +150,5 @@ C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\obj\Debug\net8
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\obj\Debug\net8.0\CarCare.Api.pdb
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\obj\Debug\net8.0\CarCare.Api.genruntimeconfig.cache
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\obj\Debug\net8.0\ref\CarCare.Api.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8.0\CarCare.DTOs.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Api\bin\Debug\net8.0\CarCare.DTOs.pdb

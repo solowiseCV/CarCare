@@ -14,3 +14,9 @@ C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\refint\CarCare.BLL.dll
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\CarCare.BLL.pdb
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\obj\Debug\net8.0\ref\CarCare.BLL.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\bin\Debug\net8.0\CarCare.DTOs.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\bin\Debug\net8.0\CarCare.DTOs.pdb
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\bin\Debug\net8.0\CarCare.DAL.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\bin\Debug\net8.0\CarCare.Infrastructure.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\bin\Debug\net8.0\CarCare.DAL.pdb
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.BLL\bin\Debug\net8.0\CarCare.Infrastructure.pdb

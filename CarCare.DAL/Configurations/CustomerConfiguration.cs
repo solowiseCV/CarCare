@@ -1,7 +1,7 @@
 using CarCare.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using CarCare.DAL.Entities; // Added for ApplicationUser
+using CarCare.DAL.Entities; 
 
 namespace CarCare.DAL.Configurations
 {
@@ -17,7 +17,7 @@ namespace CarCare.DAL.Configurations
                 .WithOne()
                 .HasForeignKey<Customer>(c => c.UserId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade); // Assuming a User deleting means also deleting their Customer profile
+                .OnDelete(DeleteBehavior.Cascade); 
 
             builder.Property(c => c.DefaultAddress)
                 .HasMaxLength(500);

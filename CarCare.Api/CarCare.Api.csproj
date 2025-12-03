@@ -21,6 +21,7 @@
 
     <ProjectReference Include="..\CarCare.Domain\CarCare.Domain.csproj" />
     <ProjectReference Include="..\CarCare.Infrastructure\CarCare.Infrastructure.csproj" />
+    <ProjectReference Include="..\CarCare.DTOs\CarCare.DTOs.csproj" />
   </ItemGroup>
 
 </Project>

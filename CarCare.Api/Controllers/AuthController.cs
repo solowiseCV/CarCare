@@ -1,5 +1,5 @@
-using CarCare.API.DTOs.Auth.RequestDto;
-using CarCare.API.Services;
+using CarCare.DTOs.Auth.RequestDto;
+using CarCare.BLL.Interfaces; 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using CarCare.DAL.Entities; 
@@ -52,11 +52,12 @@ namespace CarCare.API.Controllers
             {
                 Id = applicationUser.Id,
                 Email = applicationUser.Email,
-                Name = applicationUser.Name // Assuming Name is populated in ApplicationUser
-                // Add other properties as needed to map from ApplicationUser to Domain.User
+                Name = applicationUser.Name 
+                
             };
 
-            await _authService.SendEmailVerificationAsync(domainUser); // Pass domainUser
+            await _authService.SendEmailVerificationAsync(domainUser); 
+
             
             return Ok("Verification email sent.");
         }

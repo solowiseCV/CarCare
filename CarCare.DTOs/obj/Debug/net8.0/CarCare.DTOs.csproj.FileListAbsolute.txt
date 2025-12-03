@@ -1,0 +1,12 @@
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DTOs\bin\Debug\net8.0\CarCare.DTOs.deps.json
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DTOs\bin\Debug\net8.0\CarCare.DTOs.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DTOs\bin\Debug\net8.0\CarCare.DTOs.pdb
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DTOs\obj\Debug\net8.0\CarCare.DTOs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DTOs\obj\Debug\net8.0\CarCare.DTOs.AssemblyInfoInputs.cache
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DTOs\obj\Debug\net8.0\CarCare.DTOs.AssemblyInfo.cs
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DTOs\obj\Debug\net8.0\CarCare.DTOs.csproj.CoreCompileInputs.cache
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DTOs\obj\Debug\net8.0\CarCare.DTOs.sourcelink.json
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DTOs\obj\Debug\net8.0\CarCare.DTOs.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DTOs\obj\Debug\net8.0\refint\CarCare.DTOs.dll
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DTOs\obj\Debug\net8.0\CarCare.DTOs.pdb
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.DTOs\obj\Debug\net8.0\ref\CarCare.DTOs.dll

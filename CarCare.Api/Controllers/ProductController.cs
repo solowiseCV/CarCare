@@ -1,6 +1,6 @@
-using CarCare.API.DTOS.Product.RequestDto;
-using CarCare.API.DTOS.Product.ResponseDto;
-using CarCare.API.Services;
+using CarCare.DTOs.Product.RequestDto;
+using CarCare.DTOs.Product.ResponseDto;
+using CarCare.BLL.Interfaces; 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

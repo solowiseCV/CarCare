@@ -1,6 +1,6 @@
-using CarCare.API.DTOS.Order.RequestDto;
-using CarCare.API.DTOS.Order.ResponseDto;
-using CarCare.API.Services;
+using CarCare.DTOs.Order.RequestDto;
+using CarCare.DTOs.Order.ResponseDto;
+using CarCare.BLL.Interfaces; 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,10 +21,9 @@ namespace CarCare.API.Controllers
             _orderService = orderService;
         }
 
-        // --- Order Endpoints ---
-
+    
         [HttpGet]
-        [AllowAnonymous] // Adjust authorization as needed
+        [AllowAnonymous]
         public async Task<IActionResult> GetOrders()
         {
             var orders = await _orderService.GetOrdersAsync();
@@ -32,7 +31,7 @@ namespace CarCare.API.Controllers
         }
 
         [HttpGet("{id}")]
-        [AllowAnonymous] // Adjust authorization as needed
+        [AllowAnonymous] 
         public async Task<IActionResult> GetOrder(Guid id)
         {
             var order = await _orderService.GetOrderByIdAsync(id);
@@ -44,7 +43,7 @@ namespace CarCare.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Customer")] // Typically customers create orders
+        [Authorize(Roles = "Customer")] 
         public async Task<IActionResult> CreateOrder([FromBody] OrderRequestDto orderDto)
         {
             var newOrder = await _orderService.CreateOrderAsync(orderDto);
@@ -52,7 +51,7 @@ namespace CarCare.API.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Customer,Admin")] // Customers can update their own orders, Admin can update any
+        [Authorize(Roles = "Customer,Admin")] 
         public async Task<IActionResult> UpdateOrder(Guid id, [FromBody] OrderRequestDto orderDto)
         {
             var result = await _orderService.UpdateOrderAsync(id, orderDto);
@@ -64,7 +63,7 @@ namespace CarCare.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")] // Only Admin can delete orders
+        [Authorize(Roles = "Admin")] 
         public async Task<IActionResult> DeleteOrder(Guid id)
         {
             var result = await _orderService.DeleteOrderAsync(id);
@@ -75,9 +74,7 @@ namespace CarCare.API.Controllers
             return NoContent();
         }
 
-        // --- OrderItem Endpoints (Nested under Order or separate if needed) ---
-        // For simplicity, these are placed here, but could be a separate controller.
-
+   
         [HttpGet("{orderId}/items/{itemId}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetOrderItem(Guid orderId, Guid itemId)
@@ -94,12 +91,10 @@ namespace CarCare.API.Controllers
         [Authorize(Roles = "Customer")]
         public async Task<IActionResult> AddOrderItem(Guid orderId, [FromBody] OrderItemRequestDto orderItemDto)
         {
-            // Assign orderId from route to the DTO
-            // orderItemDto.OrderId = orderId; // This would require OrderItemRequestDto to have OrderId
+         
 
             var newOrderItem = await _orderService.CreateOrderItemAsync(orderItemDto);
-            // This is a simplified return. A more robust solution might return the updated order or
-            // a specific endpoint for the order item.
+        
             return CreatedAtAction(nameof(GetOrderItem), new { orderId = orderId, itemId = newOrderItem.Id }, newOrderItem);
         }
 

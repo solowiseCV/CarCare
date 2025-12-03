@@ -16,7 +16,7 @@ namespace CarCare.DAL.Configurations
                 .HasColumnType("decimal(10,2)");
 
             builder.HasOne(oi => oi.Product)
-                .WithMany() // Assuming Product doesn't have a navigation property for OrderItems
+                .WithMany() 
                 .HasForeignKey(oi => oi.ProductId);
         }
     }
