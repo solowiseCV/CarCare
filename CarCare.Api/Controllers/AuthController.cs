@@ -1,8 +1,9 @@
 using CarCare.API.DTOs.Auth.RequestDto;
 using CarCare.API.Services;
-using CarCare.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using CarCare.DAL.Entities; 
+using CarCare.Domain.Entities; 
 
 namespace CarCare.API.Controllers
 {
@@ -11,14 +12,14 @@ namespace CarCare.API.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         private readonly ITokenService _tokenService;
 
         private readonly IAuthService _authService;
 
-        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService, IAuthService authService)
+        public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ITokenService tokenService, IAuthService authService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -43,11 +44,20 @@ namespace CarCare.API.Controllers
         [HttpPost("send-verification-email")]
         public async Task<IActionResult> SendVerificationEmail()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user is null)
+            var applicationUser = await _userManager.GetUserAsync(User);
+            if (applicationUser is null)
                 return Unauthorized();
+            
+            var domainUser = new CarCare.Domain.Entities.User
+            {
+                Id = applicationUser.Id,
+                Email = applicationUser.Email,
+                Name = applicationUser.Name // Assuming Name is populated in ApplicationUser
+                // Add other properties as needed to map from ApplicationUser to Domain.User
+            };
 
-            await _authService.SendEmailVerificationAsync(user);
+            await _authService.SendEmailVerificationAsync(domainUser); // Pass domainUser
+            
             return Ok("Verification email sent.");
         }
 

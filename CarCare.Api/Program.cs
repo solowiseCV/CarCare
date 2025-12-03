@@ -10,6 +10,8 @@ using System.Text;
 using CarCare.Infrastructure.Identity.Seeds;
 using CarCare.Infrastructure.Email;
 using AutoMapper;
+using CarCare.Domain.Interfaces;
+using CarCare.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddAutoMapper(typeof(Program));
 //Configure Identity 
-builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
+builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
 {
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
@@ -55,6 +57,14 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ISupplierService, SupplierService>();
+builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
@@ -98,17 +108,9 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-
-    string[] roles = { "Customer", "Provider", "Admin" };
-
-    foreach (var role in roles)
-    {
-        if (!await roleManager.RoleExistsAsync(role))
-        {
-            await roleManager.CreateAsync(new IdentityRole<Guid>(role));
-        }
-    }
+    var serviceProvider = scope.ServiceProvider;
+    await RoleSeeder.SeedRolesAsync(serviceProvider);
+    await UserSeeder.SeedAdminUserAsync(serviceProvider);
 }
 
 // Configure Middleware 

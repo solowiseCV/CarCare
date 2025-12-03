@@ -1,9 +1,3 @@
-C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.csproj.AssemblyReference.cache
-C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.AssemblyInfoInputs.cache
-C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.AssemblyInfo.cs
-C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.csproj.CoreCompileInputs.cache
-C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.sourcelink.json
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\bin\Debug\net8.0\CarCare.Infrastructure.deps.json
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\bin\Debug\net8.0\CarCare.Infrastructure.dll
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\bin\Debug\net8.0\CarCare.Infrastructure.pdb
@@ -11,6 +5,12 @@ C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\bin
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\bin\Debug\net8.0\CarCare.Domain.dll
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\bin\Debug\net8.0\CarCare.Domain.pdb
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\bin\Debug\net8.0\CarCare.DAL.pdb
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.AssemblyInfo.cs
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.sourcelink.json
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare..00EBEA60.Up2Date
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\CarCare.Infrastructure.dll
 C:\Users\uches\OneDrive\Desktop\full projects\CarCare\CarCare.Infrastructure\obj\Debug\net8.0\refint\CarCare.Infrastructure.dll

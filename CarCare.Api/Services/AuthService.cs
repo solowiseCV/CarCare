@@ -1,20 +1,22 @@
 using CarCare.API.DTOs.Auth.RequestDto;
 using CarCare.API.Services;
-using CarCare.DAL.Entities;
+using CarCare.Domain.Entities; // Changed from CarCare.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
+using CarCare.DAL.Entities; // Added back for ApplicationUser
+
 
 public class AuthService : IAuthService
 {
-    private readonly UserManager<User> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
     private readonly IEmailService _emailService;
     private readonly IConfiguration _config;
-     private readonly SignInManager<User> _signInManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
     private readonly ITokenService _tokenService;
-    public AuthService(UserManager<User> userManager, 
+    public AuthService(UserManager<ApplicationUser> userManager, 
                        IEmailService emailService,
                        IConfiguration config, 
-                       SignInManager<User> signInManager,
+                       SignInManager<ApplicationUser> signInManager,
                        ITokenService tokenService)
                        
     {
@@ -25,13 +27,16 @@ public class AuthService : IAuthService
         _tokenService = tokenService;
     }
 
-    public async Task<bool> SendEmailVerificationAsync(User user)
+    public async Task<bool> SendEmailVerificationAsync(CarCare.Domain.Entities.User user)
     {
-        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-        var url = $"{_config["AppUrl"]}/api/auth/confirm-email?userId={user.Id}&token={Uri.EscapeDataString(token)}";
-         if (string.IsNullOrWhiteSpace(user.Email))
+        var applicationUser = await _userManager.FindByIdAsync(user.Id.ToString()) 
+                              ?? throw new InvalidOperationException($"ApplicationUser with ID {user.Id} not found.");
+
+        var token = await _userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
+        var url = $"{_config["AppUrl"]}/api/auth/confirm-email?userId={applicationUser.Id}&token={Uri.EscapeDataString(token)}";
+         if (string.IsNullOrWhiteSpace(applicationUser.Email))
               throw new InvalidOperationException("User email is missing.");
-        await _emailService.SendEmailAsync(user.Email, "Verify Email", $"Click to verify: {url}");
+        await _emailService.SendEmailAsync(applicationUser.Email, "Verify Email", $"Click to verify: {url}");
         return true;
     }
     
@@ -68,34 +73,57 @@ public class AuthService : IAuthService
 
      public async Task<string> RegisterAsync(RegisterDto dto)
     {
-        var user = new User
+        var applicationUser = new ApplicationUser // Changed from User to ApplicationUser
         {
             UserName = dto.Email,
             Email = dto.Email,
-            Name = dto.Name
+            Name = dto.Name,
+            // Add other properties if necessary from DTO to ApplicationUser
+            // E.g., FirstName = dto.FirstName, LastName = dto.LastName
         };
 
-        var result = await _userManager.CreateAsync(user, dto.Password);
+        var result = await _userManager.CreateAsync(applicationUser, dto.Password);
         if (!result.Succeeded)
             throw new InvalidOperationException(result.Errors.First().Description);
 
         // Assign default role
-        await _userManager.AddToRoleAsync(user, "Customer");
+        await _userManager.AddToRoleAsync(applicationUser, "Customer"); // Pass applicationUser
 
         // Send verification email
-        await SendEmailVerificationAsync(user);
+        var domainUser = new CarCare.Domain.Entities.User
+        {
+            Id = applicationUser.Id, // IdentityUser.Id is Guid, so no need for Guid.Parse
+            Email = applicationUser.Email,
+            Name = applicationUser.Name
+        };
+        await SendEmailVerificationAsync(domainUser);
 
         return "Registration successful. Check your email for verification.";
     }
 
     public async Task<string> LoginAsync(LoginDto dto)
     {
-        var user = await _userManager.FindByEmailAsync(dto.Email);
-        if (user == null) throw new InvalidOperationException("Invalid email or password.");
+        var applicationUser = await _userManager.FindByEmailAsync(dto.Email); // Renamed user to applicationUser
+        if (applicationUser == null) throw new InvalidOperationException("Invalid email or password.");
 
         var result = await _signInManager.PasswordSignInAsync(dto.Email, dto.Password, false, false);
         if (!result.Succeeded) throw new InvalidOperationException("Invalid email or password.");
 
-        return _tokenService.CreateToken(user);
+        // Create a Domain.User from ApplicationUser
+        var domainUser = new CarCare.Domain.Entities.User
+        {
+            Id = applicationUser.Id,
+            Email = applicationUser.Email,
+            Name = applicationUser.Name,
+            Address = applicationUser.Address,
+            Gender = applicationUser.Gender,
+            BirthDate = applicationUser.BirthDate,
+            ProfilePictureUrl = applicationUser.ProfilePictureUrl,
+            CreatedAt = applicationUser.CreatedAt,
+            UpdatedAt = applicationUser.UpdatedAt,
+            PhoneNumber = applicationUser.PhoneNumber
+        };
+
+        return _tokenService.CreateToken(domainUser);
     }
 }

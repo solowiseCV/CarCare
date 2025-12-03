@@ -1,4 +1,4 @@
-using CarCare.DAL.Entities;
+using CarCare.Domain.Entities;
 
 namespace CarCare.API.Services
 {

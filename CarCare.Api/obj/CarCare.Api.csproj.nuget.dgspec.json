@@ -32,9 +32,6 @@
               "C:\\Users\\uches\\OneDrive\\Desktop\\full projects\\CarCare\\CarCare.BLL\\CarCare.BLL.csproj": {
                 "projectPath": "C:\\Users\\uches\\OneDrive\\Desktop\\full projects\\CarCare\\CarCare.BLL\\CarCare.BLL.csproj"
               },
-              "C:\\Users\\uches\\OneDrive\\Desktop\\full projects\\CarCare\\CarCare.DAL\\CarCare.DAL.csproj": {
-                "projectPath": "C:\\Users\\uches\\OneDrive\\Desktop\\full projects\\CarCare\\CarCare.DAL\\CarCare.DAL.csproj"
-              },
               "C:\\Users\\uches\\OneDrive\\Desktop\\full projects\\CarCare\\CarCare.Domain\\CarCare.Domain.csproj": {
                 "projectPath": "C:\\Users\\uches\\OneDrive\\Desktop\\full projects\\CarCare\\CarCare.Domain\\CarCare.Domain.csproj"
               },
@@ -233,6 +230,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[8.0.0, )"
             }

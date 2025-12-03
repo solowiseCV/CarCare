@@ -7,7 +7,7 @@ namespace CarCare.Infrastructure.Identity.Seeds
     {
         public static async Task SeedRolesAsync(IServiceProvider serviceProvider)
         {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
 
             string[] roles = { "Admin", "Customer", "Provider" };
 
@@ -15,9 +15,10 @@ namespace CarCare.Infrastructure.Identity.Seeds
             {
                 if (!await roleManager.RoleExistsAsync(role))
                 {
-                    await roleManager.CreateAsync(new IdentityRole(role));
+                    await roleManager.CreateAsync(new IdentityRole<Guid>(role));
                 }
             }
         }
     }
 }
+

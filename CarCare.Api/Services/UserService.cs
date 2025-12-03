@@ -1,17 +1,18 @@
 using AutoMapper;
 using CarCare.API.DTOs.Auth.ResponseDto;
 using CarCare.API.DTOs.Auth.RequestDto;
-using CarCare.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
+using CarCare.DAL.Entities; // Ensure this is present for ApplicationUser
+
 
 public class UserService : IUserService
 {
-    private readonly UserManager<User> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
     private readonly IMapper _mapper;
     private readonly RoleManager<IdentityRole<Guid>> _roleManager;
 
     public UserService(
-        UserManager<User> userManager, 
+        UserManager<ApplicationUser> userManager, 
         IMapper mapper, 
         RoleManager<IdentityRole<Guid>> roleManager)
     {

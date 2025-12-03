@@ -1,5 +1,5 @@
 using CarCare.API.DTOs.Auth.RequestDto;
-using CarCare.DAL.Entities;
+using CarCare.Domain.Entities;
 
 public interface IAuthService
 {   Task<string> RegisterAsync(RegisterDto dto);
