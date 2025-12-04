@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CarCare.BLL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+732143ad99d00c768602e9fc222821c2b62e0500")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27646789b5afe2bb8312556680ea57f611619942")]
 [assembly: System.Reflection.AssemblyProductAttribute("CarCare.BLL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CarCare.BLL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
