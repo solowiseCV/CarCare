@@ -13,6 +13,7 @@ using CarCare.DTOs.Product.ResponseDto;
 using CarCare.DTOs.Supplier.RequestDto;
 using CarCare.DTOs.Supplier.ResponseDto;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -23,16 +24,17 @@ using CarCare.Infrastructure.Email;
 using AutoMapper;
 using CarCare.Domain.Interfaces;
 using CarCare.DAL.Repositories;
+using CarCare.Api.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Configure Database 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddAutoMapper(typeof(Program));
-//Configure Identity 
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
 {
     options.Password.RequireDigit = true;
@@ -44,7 +46,6 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
-// Configure JWT 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secretKey = jwtSettings["SecretKey"];
 
@@ -76,11 +77,12 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderItemService, OrderItemService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
-// Add Controllers and Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -105,7 +107,7 @@ builder.Services.AddSwaggerGen(c =>
         {
             new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference 
+                Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
                     Id = "Bearer"
@@ -113,6 +115,27 @@ builder.Services.AddSwaggerGen(c =>
             },
             new string[] {}
         }
+    });
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:3000", "http://localhost:5173")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowCredentials();
+        });
+});
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.AddFixedWindowLimiter("fixed", options =>
+    {
+        options.PermitLimit = 100;
+        options.Window = TimeSpan.FromMinutes(1);
     });
 });
 
@@ -131,6 +154,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<GlobalExceptionHandler>();
+
+app.UseCors("AllowAll");
+
+app.UseRateLimiter();
 
 app.UseHttpsRedirection();
 

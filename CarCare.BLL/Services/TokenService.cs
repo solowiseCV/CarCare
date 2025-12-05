@@ -5,47 +5,47 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using CarCare.DAL.Entities; 
+using CarCare.DAL.Entities;
 using CarCare.BLL.Interfaces;
 
-namespace CarCare.BLL.Services 
+namespace CarCare.BLL.Services
 {
     public class TokenService : ITokenService
     {
         private readonly IConfiguration _configuration;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public TokenService(IConfiguration configuration , UserManager<ApplicationUser> userManager)
+        public TokenService(IConfiguration configuration, UserManager<ApplicationUser> userManager)
         {
             _configuration = configuration;
-            _userManager= userManager;
+            _userManager = userManager;
         }
 
         public string CreateToken(CarCare.Domain.Entities.User user)
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
-            var secret = jwtSettings["SecretKey"] 
+            var secret = jwtSettings["SecretKey"]
              ?? throw new InvalidOperationException("JWT SecretKey is not configured.");
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
 
-          
-            var applicationUser = _userManager.FindByIdAsync(user.Id.ToString()).Result 
+
+            var applicationUser = _userManager.FindByIdAsync(user.Id.ToString()).Result
                                   ?? throw new InvalidOperationException($"ApplicationUser with ID {user.Id} not found.");
 
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email ?? ""),
-                new Claim(ClaimTypes.Name, applicationUser.UserName ?? "") 
+                new Claim(ClaimTypes.Name, applicationUser.UserName ?? "")
             };
-            
+
             var roles = _userManager.GetRolesAsync(applicationUser).Result;
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
-            
+
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(

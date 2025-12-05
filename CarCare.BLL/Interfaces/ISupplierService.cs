@@ -11,7 +11,7 @@ namespace CarCare.BLL.Interfaces
         Task<IEnumerable<SupplierResponseDto>> GetSuppliersAsync();
         Task<SupplierResponseDto?> GetSupplierByIdAsync(Guid id);
         Task<SupplierResponseDto> CreateSupplierAsync(SupplierRequestDto supplierDto);
-        Task<bool> UpdateSupplierAsync(Guid id, SupplierRequestDto supplierDto);
-        Task<bool> DeleteSupplierAsync(Guid id);
+        Task UpdateSupplierAsync(Guid id, SupplierRequestDto supplierDto);
+        Task DeleteSupplierAsync(Guid id);
     }
 }

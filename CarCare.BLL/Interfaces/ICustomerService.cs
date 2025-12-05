@@ -11,7 +11,7 @@ namespace CarCare.BLL.Interfaces
         Task<IEnumerable<CustomerResponseDto>> GetCustomersAsync();
         Task<CustomerResponseDto?> GetCustomerByIdAsync(Guid id);
         Task<CustomerResponseDto> CreateCustomerAsync(CustomerRequestDto customerDto);
-        Task<bool> UpdateCustomerAsync(Guid id, CustomerRequestDto customerDto);
-        Task<bool> DeleteCustomerAsync(Guid id);
+        Task UpdateCustomerAsync(Guid id, CustomerRequestDto customerDto);
+        Task DeleteCustomerAsync(Guid id);
     }
 }

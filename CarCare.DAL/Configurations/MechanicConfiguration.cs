@@ -1,7 +1,7 @@
 using CarCare.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using CarCare.DAL.Entities; 
+using CarCare.DAL.Entities;
 
 namespace CarCare.DAL.Configurations
 {
@@ -17,7 +17,7 @@ namespace CarCare.DAL.Configurations
                 .WithOne()
                 .HasForeignKey<Mechanic>(m => m.UserId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade); 
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(m => m.WorkshopName)
                 .IsRequired()

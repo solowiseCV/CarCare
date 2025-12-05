@@ -1,8 +1,8 @@
-using System; 
+using System;
 using CarCare.DTOs.Auth.RequestDto;
 using CarCare.DTOs.Auth.ResponseDto;
 
-namespace CarCare.BLL.Interfaces 
+namespace CarCare.BLL.Interfaces
 {
     public interface IUserService
     {

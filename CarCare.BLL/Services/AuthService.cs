@@ -1,11 +1,11 @@
 using CarCare.DTOs.Auth.RequestDto;
 using CarCare.BLL.Interfaces;
-using CarCare.Domain.Entities; 
+using CarCare.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
-using CarCare.DAL.Entities; 
+using CarCare.DAL.Entities;
 using Microsoft.Extensions.Configuration;
 
-namespace CarCare.BLL.Services 
+namespace CarCare.BLL.Services
 {
     public class AuthService : IAuthService
     {
@@ -15,12 +15,12 @@ namespace CarCare.BLL.Services
         private readonly SignInManager<ApplicationUser> _signInManager;
 
         private readonly ITokenService _tokenService;
-        public AuthService(UserManager<ApplicationUser> userManager, 
+        public AuthService(UserManager<ApplicationUser> userManager,
                            IEmailService emailService,
-                           IConfiguration config, 
+                           IConfiguration config,
                            SignInManager<ApplicationUser> signInManager,
                            ITokenService tokenService)
-                           
+
         {
             _userManager = userManager;
             _emailService = emailService;
@@ -31,17 +31,17 @@ namespace CarCare.BLL.Services
 
         public async Task<bool> SendEmailVerificationAsync(CarCare.Domain.Entities.User user)
         {
-            var applicationUser = await _userManager.FindByIdAsync(user.Id.ToString()) 
+            var applicationUser = await _userManager.FindByIdAsync(user.Id.ToString())
                                   ?? throw new InvalidOperationException($"ApplicationUser with ID {user.Id} not found.");
 
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
             var url = $"{_config["AppUrl"]}/api/auth/confirm-email?userId={applicationUser.Id}&token={Uri.EscapeDataString(token)}";
-             if (string.IsNullOrWhiteSpace(applicationUser.Email))
-                  throw new InvalidOperationException("User email is missing.");
+            if (string.IsNullOrWhiteSpace(applicationUser.Email))
+                throw new InvalidOperationException("User email is missing.");
             await _emailService.SendEmailAsync(applicationUser.Email, "Verify Email", $"Click to verify: {url}");
             return true;
         }
-        
+
 
         public async Task<bool> ConfirmEmailAsync(string userId, string token)
         {
@@ -73,9 +73,9 @@ namespace CarCare.BLL.Services
             return result.Succeeded;
         }
 
-         public async Task<string> RegisterAsync(RegisterDto dto)
+        public async Task<string> RegisterAsync(RegisterDto dto)
         {
-            var applicationUser = new ApplicationUser 
+            var applicationUser = new ApplicationUser
             {
                 UserName = dto.Email,
                 Email = dto.Email,
@@ -86,13 +86,13 @@ namespace CarCare.BLL.Services
             if (!result.Succeeded)
                 throw new InvalidOperationException(result.Errors.First().Description);
 
-        
+
             await _userManager.AddToRoleAsync(applicationUser, "Customer");
 
             // Send verification email
             var domainUser = new CarCare.Domain.Entities.User
             {
-                Id = applicationUser.Id, 
+                Id = applicationUser.Id,
                 Email = applicationUser.Email,
                 Name = applicationUser.Name
             };
@@ -103,13 +103,13 @@ namespace CarCare.BLL.Services
 
         public async Task<string> LoginAsync(LoginDto dto)
         {
-            var applicationUser = await _userManager.FindByEmailAsync(dto.Email); 
+            var applicationUser = await _userManager.FindByEmailAsync(dto.Email);
             if (applicationUser == null) throw new InvalidOperationException("Invalid email or password.");
 
             var result = await _signInManager.PasswordSignInAsync(dto.Email, dto.Password, false, false);
             if (!result.Succeeded) throw new InvalidOperationException("Invalid email or password.");
 
-           
+
             var domainUser = new CarCare.Domain.Entities.User
             {
                 Id = applicationUser.Id,

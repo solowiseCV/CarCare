@@ -23,38 +23,45 @@ namespace CarCare.BLL.Services
 
         public async Task<IEnumerable<CustomerResponseDto>> GetCustomersAsync()
         {
-            var customers = await _customerRepository.GetCustomersAsync();
+            var customers = await _customerRepository.ListAllAsync();
             return _mapper.Map<IEnumerable<CustomerResponseDto>>(customers);
         }
 
         public async Task<CustomerResponseDto?> GetCustomerByIdAsync(Guid id)
         {
-            var customer = await _customerRepository.GetCustomerByIdAsync(id);
+            var customer = await _customerRepository.GetByIdAsync(id);
             return _mapper.Map<CustomerResponseDto>(customer);
         }
 
         public async Task<CustomerResponseDto> CreateCustomerAsync(CustomerRequestDto customerDto)
         {
             var customer = _mapper.Map<Customer>(customerDto);
-            var newCustomer = await _customerRepository.AddCustomerAsync(customer);
+            var newCustomer = await _customerRepository.AddAsync(customer);
             return _mapper.Map<CustomerResponseDto>(newCustomer);
         }
 
-        public async Task<bool> UpdateCustomerAsync(Guid id, CustomerRequestDto customerDto)
+        public async Task UpdateCustomerAsync(Guid id, CustomerRequestDto customerDto)
         {
-            var customer = await _customerRepository.GetCustomerByIdAsync(id);
+            var customer = await _customerRepository.GetByIdAsync(id);
             if (customer == null)
             {
-                return false;
+               
+                return;
             }
 
             _mapper.Map(customerDto, customer);
-            return await _customerRepository.UpdateCustomerAsync(customer);
+            await _customerRepository.UpdateAsync(customer);
         }
 
-        public async Task<bool> DeleteCustomerAsync(Guid id)
+        public async Task DeleteCustomerAsync(Guid id)
         {
-            return await _customerRepository.DeleteCustomerAsync(id);
+            var customer = await _customerRepository.GetByIdAsync(id);
+            if (customer == null)
+            {
+             
+                return;
+            }
+            await _customerRepository.DeleteAsync(customer);
         }
     }
 }

@@ -1,6 +1,6 @@
 using CarCare.DTOs.Supplier.RequestDto;
 using CarCare.DTOs.Supplier.ResponseDto;
-using CarCare.BLL.Interfaces; 
+using CarCare.BLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -53,11 +53,7 @@ namespace CarCare.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateSupplier(Guid id, [FromBody] SupplierRequestDto supplierDto)
         {
-            var result = await _supplierService.UpdateSupplierAsync(id, supplierDto);
-            if (!result)
-            {
-                return NotFound();
-            }
+            await _supplierService.UpdateSupplierAsync(id, supplierDto);
             return NoContent();
         }
 
@@ -65,11 +61,7 @@ namespace CarCare.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteSupplier(Guid id)
         {
-            var result = await _supplierService.DeleteSupplierAsync(id);
-            if (!result)
-            {
-                return NotFound();
-            }
+            await _supplierService.DeleteSupplierAsync(id);
             return NoContent();
         }
     }

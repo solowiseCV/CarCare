@@ -14,8 +14,8 @@ namespace CarCare.DAL.Entities
 
         public string? Gender { get; set; }
         public DateTime? BirthDate { get; set; }
-         
-         public string? ProfilePictureUrl { get; set; }
+
+        public string? ProfilePictureUrl { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }

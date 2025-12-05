@@ -6,9 +6,9 @@ using CarCare.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CarCare.BLL.Interfaces; 
+using CarCare.BLL.Interfaces;
 
-namespace CarCare.BLL.Services 
+namespace CarCare.BLL.Services
 {
     public class SupplierService : ISupplierService
     {
@@ -23,38 +23,45 @@ namespace CarCare.BLL.Services
 
         public async Task<IEnumerable<SupplierResponseDto>> GetSuppliersAsync()
         {
-            var suppliers = await _supplierRepository.GetSuppliersAsync();
+            var suppliers = await _supplierRepository.ListAllAsync();
             return _mapper.Map<IEnumerable<SupplierResponseDto>>(suppliers);
         }
 
         public async Task<SupplierResponseDto?> GetSupplierByIdAsync(Guid id)
         {
-            var supplier = await _supplierRepository.GetSupplierByIdAsync(id);
+            var supplier = await _supplierRepository.GetByIdAsync(id);
             return _mapper.Map<SupplierResponseDto>(supplier);
         }
 
         public async Task<SupplierResponseDto> CreateSupplierAsync(SupplierRequestDto supplierDto)
         {
             var supplier = _mapper.Map<Supplier>(supplierDto);
-            var newSupplier = await _supplierRepository.AddSupplierAsync(supplier);
+            var newSupplier = await _supplierRepository.AddAsync(supplier);
             return _mapper.Map<SupplierResponseDto>(newSupplier);
         }
 
-        public async Task<bool> UpdateSupplierAsync(Guid id, SupplierRequestDto supplierDto)
+        public async Task UpdateSupplierAsync(Guid id, SupplierRequestDto supplierDto)
         {
-            var supplier = await _supplierRepository.GetSupplierByIdAsync(id);
+            var supplier = await _supplierRepository.GetByIdAsync(id);
             if (supplier == null)
             {
-                return false;
+              
+                return;
             }
 
             _mapper.Map(supplierDto, supplier);
-            return await _supplierRepository.UpdateSupplierAsync(supplier);
+            await _supplierRepository.UpdateAsync(supplier);
         }
 
-        public async Task<bool> DeleteSupplierAsync(Guid id)
+        public async Task DeleteSupplierAsync(Guid id)
         {
-            return await _supplierRepository.DeleteSupplierAsync(id);
+            var supplier = await _supplierRepository.GetByIdAsync(id);
+            if (supplier == null)
+            {
+             
+                return;
+            }
+            await _supplierRepository.DeleteAsync(supplier);
         }
     }
 }

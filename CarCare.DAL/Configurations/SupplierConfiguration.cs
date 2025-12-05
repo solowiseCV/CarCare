@@ -1,7 +1,7 @@
 using CarCare.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using CarCare.DAL.Entities; 
+using CarCare.DAL.Entities;
 
 namespace CarCare.DAL.Configurations
 {
@@ -17,7 +17,7 @@ namespace CarCare.DAL.Configurations
                 .WithOne()
                 .HasForeignKey<Supplier>(s => s.UserId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade); 
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(s => s.CompanyName)
                 .IsRequired()
@@ -55,7 +55,7 @@ namespace CarCare.DAL.Configurations
 
             builder.Property(s => s.OnTimeDeliveryRate)
                 .HasColumnType("decimal(5,2)");
-            
+
             builder.HasMany(s => s.Products)
                 .WithOne(p => p.Supplier)
                 .HasForeignKey(p => p.SupplierId);

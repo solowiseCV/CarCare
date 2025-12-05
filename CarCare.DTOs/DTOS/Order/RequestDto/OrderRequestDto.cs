@@ -12,7 +12,7 @@ namespace CarCare.DTOs.Order.RequestDto
         public string DeliveryAddress { get; set; } = string.Empty;
 
         [MaxLength(50)]
-        public string Status { get; set; } = "Pending"; 
+        public string Status { get; set; } = "Pending";
 
         public bool InstallationRequested { get; set; } = false;
         public Guid? MechanicId { get; set; }

@@ -2,10 +2,10 @@ using AutoMapper;
 using CarCare.DTOs.Auth.ResponseDto;
 using CarCare.DTOs.Auth.RequestDto;
 using Microsoft.AspNetCore.Identity;
-using CarCare.DAL.Entities; 
-using CarCare.BLL.Interfaces; 
+using CarCare.DAL.Entities;
+using CarCare.BLL.Interfaces;
 
-namespace CarCare.BLL.Services 
+namespace CarCare.BLL.Services
 {
     public class UserService : IUserService
     {
@@ -14,8 +14,8 @@ namespace CarCare.BLL.Services
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
 
         public UserService(
-            UserManager<ApplicationUser> userManager, 
-            IMapper mapper, 
+            UserManager<ApplicationUser> userManager,
+            IMapper mapper,
             RoleManager<IdentityRole<Guid>> roleManager)
         {
             _userManager = userManager;

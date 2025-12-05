@@ -6,9 +6,9 @@ using CarCare.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CarCare.BLL.Interfaces; 
+using CarCare.BLL.Interfaces;
 
-namespace CarCare.BLL.Services 
+namespace CarCare.BLL.Services
 {
     public class OrderService : IOrderService
     {
@@ -23,69 +23,45 @@ namespace CarCare.BLL.Services
 
         public async Task<IEnumerable<OrderResponseDto>> GetOrdersAsync()
         {
-            var orders = await _orderRepository.GetOrdersAsync();
+            var orders = await _orderRepository.ListAllAsync();
             return _mapper.Map<IEnumerable<OrderResponseDto>>(orders);
         }
 
         public async Task<OrderResponseDto?> GetOrderByIdAsync(Guid id)
         {
-            var order = await _orderRepository.GetOrderByIdAsync(id);
+            var order = await _orderRepository.GetByIdAsync(id);
             return _mapper.Map<OrderResponseDto>(order);
         }
 
         public async Task<OrderResponseDto> CreateOrderAsync(OrderRequestDto orderDto)
         {
             var order = _mapper.Map<Order>(orderDto);
-            var newOrder = await _orderRepository.AddOrderAsync(order);
+            var newOrder = await _orderRepository.AddAsync(order);
             return _mapper.Map<OrderResponseDto>(newOrder);
         }
 
-        public async Task<bool> UpdateOrderAsync(Guid id, OrderRequestDto orderDto)
+        public async Task UpdateOrderAsync(Guid id, OrderRequestDto orderDto)
         {
-            var existingOrder = await _orderRepository.GetOrderByIdAsync(id);
+            var existingOrder = await _orderRepository.GetByIdAsync(id);
             if (existingOrder == null)
             {
-                return false;
+              
+                return;
             }
 
-            _mapper.Map(orderDto, existingOrder); 
-            return await _orderRepository.UpdateOrderAsync(existingOrder);
+            _mapper.Map(orderDto, existingOrder);
+            await _orderRepository.UpdateAsync(existingOrder);
         }
 
-        public async Task<bool> DeleteOrderAsync(Guid id)
+        public async Task DeleteOrderAsync(Guid id)
         {
-            return await _orderRepository.DeleteOrderAsync(id);
-        }
-
-    
-        public async Task<OrderItemResponseDto?> GetOrderItemByIdAsync(Guid id)
-        {
-            var orderItem = await _orderRepository.GetOrderItemByIdAsync(id);
-            return _mapper.Map<OrderItemResponseDto>(orderItem);
-        }
-
-        public async Task<OrderItemResponseDto> CreateOrderItemAsync(OrderItemRequestDto orderItemDto)
-        {
-            var orderItem = _mapper.Map<OrderItem>(orderItemDto);
-            var newOrderItem = await _orderRepository.AddOrderItemAsync(orderItem);
-            return _mapper.Map<OrderItemResponseDto>(newOrderItem);
-        }
-
-        public async Task<bool> UpdateOrderItemAsync(Guid id, OrderItemRequestDto orderItemDto)
-        {
-            var existingOrderItem = await _orderRepository.GetOrderItemByIdAsync(id);
-            if (existingOrderItem == null)
+            var order = await _orderRepository.GetByIdAsync(id);
+            if (order == null)
             {
-                return false;
+            
+                return;
             }
-
-            _mapper.Map(orderItemDto, existingOrderItem);
-            return await _orderRepository.UpdateOrderItemAsync(existingOrderItem);
-        }
-
-        public async Task<bool> DeleteOrderItemAsync(Guid id)
-        {
-            return await _orderRepository.DeleteOrderItemAsync(id);
+            await _orderRepository.DeleteAsync(order);
         }
     }
 }

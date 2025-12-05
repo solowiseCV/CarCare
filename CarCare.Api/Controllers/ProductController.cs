@@ -1,6 +1,6 @@
 using CarCare.DTOs.Product.RequestDto;
 using CarCare.DTOs.Product.ResponseDto;
-using CarCare.BLL.Interfaces; 
+using CarCare.BLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -29,7 +29,7 @@ namespace CarCare.API.Controllers
 
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetProduct(int id)
+        public async Task<IActionResult> GetProduct(Guid id)
         {
             var product = await _productService.GetProductByIdAsync(id);
             if (product == null)
@@ -49,25 +49,17 @@ namespace CarCare.API.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductRequestDto productDto)
+        public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] ProductRequestDto productDto)
         {
-            var result = await _productService.UpdateProductAsync(id, productDto);
-            if (!result)
-            {
-                return NotFound();
-            }
+            await _productService.UpdateProductAsync(id, productDto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<IActionResult> DeleteProduct(Guid id)
         {
-            var result = await _productService.DeleteProductAsync(id);
-            if (!result)
-            {
-                return NotFound();
-            }
+            await _productService.DeleteProductAsync(id);
             return NoContent();
         }
     }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CarCare.DTOs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27646789b5afe2bb8312556680ea57f611619942")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85b004321686bce90ea2160ded7613caeb785898")]
 [assembly: System.Reflection.AssemblyProductAttribute("CarCare.DTOs")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CarCare.DTOs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,9 +1,9 @@
 using CarCare.DTOs.Auth.RequestDto;
-using CarCare.BLL.Interfaces; 
+using CarCare.BLL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using CarCare.DAL.Entities; 
-using CarCare.Domain.Entities; 
+using CarCare.DAL.Entities;
+using CarCare.Domain.Entities;
 
 namespace CarCare.API.Controllers
 {
@@ -47,18 +47,18 @@ namespace CarCare.API.Controllers
             var applicationUser = await _userManager.GetUserAsync(User);
             if (applicationUser is null)
                 return Unauthorized();
-            
+
             var domainUser = new CarCare.Domain.Entities.User
             {
                 Id = applicationUser.Id,
                 Email = applicationUser.Email,
-                Name = applicationUser.Name 
-                
+                Name = applicationUser.Name
+
             };
 
-            await _authService.SendEmailVerificationAsync(domainUser); 
+            await _authService.SendEmailVerificationAsync(domainUser);
 
-            
+
             return Ok("Verification email sent.");
         }
 

@@ -53,11 +53,7 @@ namespace CarCare.Api.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateCustomer(Guid id, [FromBody] CustomerRequestDto customerDto)
         {
-            var result = await _customerService.UpdateCustomerAsync(id, customerDto);
-            if (!result)
-            {
-                return NotFound();
-            }
+            await _customerService.UpdateCustomerAsync(id, customerDto);
             return NoContent();
         }
 
@@ -65,11 +61,7 @@ namespace CarCare.Api.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCustomer(Guid id)
         {
-            var result = await _customerService.DeleteCustomerAsync(id);
-            if (!result)
-            {
-                return NotFound();
-            }
+            await _customerService.DeleteCustomerAsync(id);
             return NoContent();
         }
     }

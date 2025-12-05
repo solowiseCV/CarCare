@@ -7,6 +7,6 @@ public class UserProfile : Profile
     public UserProfile()
     {
         CreateMap<ApplicationUser, UserDto>()
-            .ForMember(dest => dest.Roles, opt => opt.Ignore()); 
+            .ForMember(dest => dest.Roles, opt => opt.Ignore());
     }
 }

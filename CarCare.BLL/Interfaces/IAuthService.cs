@@ -1,10 +1,11 @@
 using CarCare.DTOs.Auth.RequestDto;
 using CarCare.Domain.Entities;
 
-namespace CarCare.BLL.Interfaces 
+namespace CarCare.BLL.Interfaces
 {
     public interface IAuthService
-    {   Task<string> RegisterAsync(RegisterDto dto);
+    {
+        Task<string> RegisterAsync(RegisterDto dto);
         Task<string> LoginAsync(LoginDto dto);
         Task<bool> SendEmailVerificationAsync(User user);
         Task<bool> ConfirmEmailAsync(string userId, string token);

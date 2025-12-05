@@ -5,9 +5,9 @@ using CarCare.Domain.Interfaces;
 using CarCare.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CarCare.BLL.Interfaces; 
+using CarCare.BLL.Interfaces;
 
-namespace CarCare.BLL.Services 
+namespace CarCare.BLL.Services
 {
     public class ProductService : IProductService
     {
@@ -22,38 +22,45 @@ namespace CarCare.BLL.Services
 
         public async Task<IEnumerable<ProductResponseDto>> GetProductsAsync()
         {
-            var products = await _productRepository.GetProductsAsync();
+            var products = await _productRepository.ListAllAsync();
             return _mapper.Map<IEnumerable<ProductResponseDto>>(products);
         }
 
-        public async Task<ProductResponseDto?> GetProductByIdAsync(int id)
+        public async Task<ProductResponseDto?> GetProductByIdAsync(Guid id)
         {
-            var product = await _productRepository.GetProductByIdAsync(id);
+            var product = await _productRepository.GetByIdAsync(id);
             return _mapper.Map<ProductResponseDto>(product);
         }
 
         public async Task<ProductResponseDto> CreateProductAsync(ProductRequestDto productDto)
         {
             var product = _mapper.Map<Product>(productDto);
-            var newProduct = await _productRepository.AddProductAsync(product);
+            var newProduct = await _productRepository.AddAsync(product);
             return _mapper.Map<ProductResponseDto>(newProduct);
         }
 
-        public async Task<bool> UpdateProductAsync(int id, ProductRequestDto productDto)
+        public async Task UpdateProductAsync(Guid id, ProductRequestDto productDto)
         {
-            var product = await _productRepository.GetProductByIdAsync(id);
+            var product = await _productRepository.GetByIdAsync(id);
             if (product == null)
             {
-                return false;
+               
+                return;
             }
 
             _mapper.Map(productDto, product);
-            return await _productRepository.UpdateProductAsync(product);
+            await _productRepository.UpdateAsync(product);
         }
 
-        public async Task<bool> DeleteProductAsync(int id)
+        public async Task DeleteProductAsync(Guid id)
         {
-            return await _productRepository.DeleteProductAsync(id);
+            var product = await _productRepository.GetByIdAsync(id);
+            if (product == null)
+            {
+             
+                return;
+            }
+            await _productRepository.DeleteAsync(product);
         }
     }
 }

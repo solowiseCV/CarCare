@@ -1,6 +1,6 @@
 using CarCare.Domain.Entities;
 
-namespace CarCare.BLL.Interfaces 
+namespace CarCare.BLL.Interfaces
 {
     public interface ITokenService
     {

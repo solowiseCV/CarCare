@@ -6,5 +6,5 @@ namespace CarCare.DTOs.Auth.RequestDto
         public string Address { get; set; } = null!;
     }
 
-    
+
 }

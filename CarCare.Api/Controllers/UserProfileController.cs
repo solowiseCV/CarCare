@@ -2,7 +2,7 @@ using CarCare.DTOs.Auth.RequestDto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using CarCare.BLL.Interfaces; 
+using CarCare.BLL.Interfaces;
 
 namespace CarCare.API.Controllers
 {
@@ -31,35 +31,33 @@ namespace CarCare.API.Controllers
 
             return Ok(userDto);
         }
-         
-          [HttpPatch("me")]
+
+        [HttpPatch("me")]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateUserDto dto)
         {
             var userId = GetUserId();
             if (userId == null) return Unauthorized();
 
-            var result = await _userService.UpdateUserProfileAsync(userId.Value, dto);
+            await _userService.UpdateUserProfileAsync(userId.Value, dto);
 
-            return result ? Ok("Profile updated")
-                          : BadRequest("Update failed");
+            return Ok("Profile updated");
         }
 
-      
+
         [HttpDelete("me")]
         public async Task<IActionResult> DeleteAccount()
         {
             var userId = GetUserId();
             if (userId == null) return Unauthorized();
 
-            var result = await _userService.DeleteUserByIdAsync(userId.Value);
+            await _userService.DeleteUserByIdAsync(userId.Value);
 
-            return result ? Ok("Account deleted")
-                          : BadRequest("Delete failed");
+            return Ok("Account deleted");
         }
 
-      
+
         [HttpPut("role/{userId}")]
-        [Authorize(Roles = "Admin")]  
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateUserRole(Guid userId, [FromQuery] string role)
         {
             var result = await _userService.UpdateUserRoleAsync(userId, role);
@@ -73,8 +71,8 @@ namespace CarCare.API.Controllers
             var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return id == null ? null : Guid.Parse(id);
         }
-    
+
     }
 
-  
+
 }
