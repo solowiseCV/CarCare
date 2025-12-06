@@ -4,6 +4,8 @@ using CarCare.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using CarCare.DAL.Entities;
 using Microsoft.Extensions.Configuration;
+using CarCare.Domain.Interfaces; // Added for IRepository interfaces
+using System.Linq; // Added for First() on errors
 
 namespace CarCare.BLL.Services
 {
@@ -13,20 +15,28 @@ namespace CarCare.BLL.Services
         private readonly IEmailService _emailService;
         private readonly IConfiguration _config;
         private readonly SignInManager<ApplicationUser> _signInManager;
-
         private readonly ITokenService _tokenService;
+        private readonly ICustomerRepository _customerRepository; // Injected
+        private readonly ISupplierRepository _supplierRepository; // Injected
+        private readonly RoleManager<IdentityRole> _roleManager; // Injected to check role existence
+
         public AuthService(UserManager<ApplicationUser> userManager,
                            IEmailService emailService,
                            IConfiguration config,
                            SignInManager<ApplicationUser> signInManager,
-                           ITokenService tokenService)
-
+                           ITokenService tokenService,
+                           ICustomerRepository customerRepository, // Added
+                           ISupplierRepository supplierRepository, // Added
+                           RoleManager<IdentityRole> roleManager) // Added
         {
             _userManager = userManager;
             _emailService = emailService;
             _config = config;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _customerRepository = customerRepository; // Assigned
+            _supplierRepository = supplierRepository; // Assigned
+            _roleManager = roleManager; // Assigned
         }
 
         public async Task<bool> SendEmailVerificationAsync(CarCare.Domain.Entities.User user)
@@ -75,6 +85,19 @@ namespace CarCare.BLL.Services
 
         public async Task<string> RegisterAsync(RegisterDto dto)
         {
+            // Validate chosen role
+            var allowedRoles = new[] { "Customer", "Supplier" }; // "Mechanic" if implemented
+            if (!allowedRoles.Contains(dto.Role))
+            {
+                throw new InvalidOperationException($"Invalid role specified. Allowed roles are: {string.Join(", ", allowedRoles)}.");
+            }
+
+            // Ensure role exists in the system
+            if (!await _roleManager.RoleExistsAsync(dto.Role))
+            {
+                throw new InvalidOperationException($"Role '{dto.Role}' does not exist in the system. Please contact administrator.");
+            }
+
             var applicationUser = new ApplicationUser
             {
                 UserName = dto.Email,
@@ -86,8 +109,26 @@ namespace CarCare.BLL.Services
             if (!result.Succeeded)
                 throw new InvalidOperationException(result.Errors.First().Description);
 
+            // Assign the chosen role
+            await _userManager.AddToRoleAsync(applicationUser, dto.Role);
 
-            await _userManager.AddToRoleAsync(applicationUser, "Customer");
+            // Create specific profile based on role
+            switch (dto.Role)
+            {
+                case "Customer":
+                    var customer = new Customer { UserId = applicationUser.Id };
+                    await _customerRepository.AddAsync(customer);
+                    break;
+                case "Supplier":
+                    var supplier = new Supplier { UserId = applicationUser.Id, CompanyName = dto.Name }; // Assuming CompanyName can be initialized with user's name
+                    await _supplierRepository.AddAsync(supplier);
+                    break;
+                // case "Mechanic": // If Mechanic is added later
+                //    var mechanic = new Mechanic { UserId = applicationUser.Id };
+                //    await _mechanicRepository.AddAsync(mechanic);
+                //    break;
+            }
+
 
             // Send verification email
             var domainUser = new CarCare.Domain.Entities.User

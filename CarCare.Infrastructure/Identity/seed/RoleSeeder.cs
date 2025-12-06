@@ -9,7 +9,7 @@ namespace CarCare.Infrastructure.Identity.Seeds
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
 
-            string[] roles = { "Admin", "Customer", "Provider" };
+            string[] roles = { "Admin", "Customer", "Provider", "Supplier" }; 
 
             foreach (var role in roles)
             {
