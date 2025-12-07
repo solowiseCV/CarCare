@@ -24,11 +24,7 @@ namespace CarCare.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetOrderItem(Guid orderId, Guid itemId)
         {
-            var orderItem = await _orderItemService.GetOrderItemByIdAsync(itemId);
-            if (orderItem == null || orderItem.OrderId != orderId)
-            {
-                return NotFound();
-            }
+            var orderItem = await _orderItemService.GetOrderItemByIdAsync(orderId, itemId);
             return Ok(orderItem);
         }
 

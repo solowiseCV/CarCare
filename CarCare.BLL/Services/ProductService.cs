@@ -1,4 +1,5 @@
 using AutoMapper;
+using CarCare.BLL.Exceptions;
 using CarCare.DTOs.Product.RequestDto;
 using CarCare.DTOs.Product.ResponseDto;
 using CarCare.Domain.Interfaces;
@@ -26,9 +27,13 @@ namespace CarCare.BLL.Services
             return _mapper.Map<IEnumerable<ProductResponseDto>>(products);
         }
 
-        public async Task<ProductResponseDto?> GetProductByIdAsync(Guid id)
+        public async Task<ProductResponseDto> GetProductByIdAsync(Guid id)
         {
             var product = await _productRepository.GetByIdAsync(id);
+            if (product == null)
+            {
+                throw new NotFoundException("Product not found.");
+            }
             return _mapper.Map<ProductResponseDto>(product);
         }
 
@@ -44,8 +49,7 @@ namespace CarCare.BLL.Services
             var product = await _productRepository.GetByIdAsync(id);
             if (product == null)
             {
-               
-                return;
+                throw new NotFoundException("Product not found.");
             }
 
             _mapper.Map(productDto, product);
@@ -57,8 +61,7 @@ namespace CarCare.BLL.Services
             var product = await _productRepository.GetByIdAsync(id);
             if (product == null)
             {
-             
-                return;
+                throw new NotFoundException("Product not found.");
             }
             await _productRepository.DeleteAsync(product);
         }

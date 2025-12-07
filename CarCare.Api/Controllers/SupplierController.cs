@@ -34,10 +34,6 @@ namespace CarCare.API.Controllers
         public async Task<IActionResult> GetSupplier(Guid id)
         {
             var supplier = await _supplierService.GetSupplierByIdAsync(id);
-            if (supplier == null)
-            {
-                return NotFound();
-            }
             return Ok(supplier);
         }
 

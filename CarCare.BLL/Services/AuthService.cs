@@ -1,10 +1,11 @@
+using CarCare.BLL.Exceptions;
 using CarCare.DTOs.Auth.RequestDto;
 using CarCare.BLL.Interfaces;
 using CarCare.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using CarCare.DAL.Entities;
 using Microsoft.Extensions.Configuration;
-using CarCare.Domain.Interfaces; 
+using CarCare.Domain.Interfaces;
 using System.Linq;
 
 namespace CarCare.BLL.Services
@@ -17,24 +18,24 @@ namespace CarCare.BLL.Services
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ITokenService _tokenService;
         private readonly ICustomerRepository _customerRepository;
-        private readonly ISupplierRepository _supplierRepository; 
+        private readonly ISupplierRepository _supplierRepository;
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         public AuthService(UserManager<ApplicationUser> userManager,
                            IEmailService emailService,
                            IConfiguration config,
                            SignInManager<ApplicationUser> signInManager,
                            ITokenService tokenService,
-                           ICustomerRepository customerRepository, 
-                           ISupplierRepository supplierRepository, 
-                           RoleManager<IdentityRole<Guid>> roleManager) 
+                           ICustomerRepository customerRepository,
+                           ISupplierRepository supplierRepository,
+                           RoleManager<IdentityRole<Guid>> roleManager)
         {
             _userManager = userManager;
             _emailService = emailService;
             _config = config;
             _signInManager = signInManager;
             _tokenService = tokenService;
-            _customerRepository = customerRepository; 
-            _supplierRepository = supplierRepository; 
+            _customerRepository = customerRepository;
+            _supplierRepository = supplierRepository;
             _roleManager = roleManager;
         }
 
@@ -84,14 +85,14 @@ namespace CarCare.BLL.Services
 
         public async Task<string> RegisterAsync(RegisterDto dto)
         {
-           
-            var allowedRoles = new[] { "Customer", "Supplier" }; 
+
+            var allowedRoles = new[] { "Customer", "Supplier" };
             if (!allowedRoles.Contains(dto.Role))
             {
                 throw new InvalidOperationException($"Invalid role specified. Allowed roles are: {string.Join(", ", allowedRoles)}.");
             }
 
-           
+
             if (!await _roleManager.RoleExistsAsync(dto.Role))
             {
                 throw new InvalidOperationException($"Role '{dto.Role}' does not exist in the system. Please contact administrator.");
@@ -142,10 +143,10 @@ namespace CarCare.BLL.Services
         public async Task<string> LoginAsync(LoginDto dto)
         {
             var applicationUser = await _userManager.FindByEmailAsync(dto.Email);
-            if (applicationUser == null) throw new InvalidOperationException("Invalid email or password.");
+            if (applicationUser == null) throw new BadRequestException("Invalid email or password.");
 
             var result = await _signInManager.PasswordSignInAsync(dto.Email, dto.Password, false, false);
-            if (!result.Succeeded) throw new InvalidOperationException("Invalid email or password.");
+            if (!result.Succeeded) throw new BadRequestException("Invalid email or password.");
 
 
             var domainUser = new CarCare.Domain.Entities.User

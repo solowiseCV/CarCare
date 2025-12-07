@@ -1,4 +1,5 @@
 using AutoMapper;
+using CarCare.BLL.Exceptions;
 using CarCare.DTOs.Auth.ResponseDto;
 using CarCare.DTOs.Auth.RequestDto;
 using Microsoft.AspNetCore.Identity;
@@ -26,16 +27,16 @@ namespace CarCare.BLL.Services
         public async Task<bool> DeleteUserByIdAsync(Guid userId)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null) return false;
+            if (user == null) throw new NotFoundException("User not found.");
 
             var result = await _userManager.DeleteAsync(user);
             return result.Succeeded;
         }
 
-        public async Task<UserDto?> GetCurrentUserByIdAsync(Guid userId)
+        public async Task<UserDto> GetCurrentUserByIdAsync(Guid userId)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null) return null;
+            if (user == null) throw new NotFoundException("User not found.");
 
             var dto = _mapper.Map<UserDto>(user);
             dto.Roles = (await _userManager.GetRolesAsync(user)).ToArray();
@@ -46,7 +47,7 @@ namespace CarCare.BLL.Services
         public async Task<bool> UpdateUserProfileAsync(Guid userId, UpdateUserDto updateDto)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null) return false;
+            if (user == null) throw new NotFoundException("User not found.");
 
             user.Name = updateDto.Name ?? user.Name;
             user.Address = updateDto.Address ?? user.Address;
@@ -58,10 +59,10 @@ namespace CarCare.BLL.Services
         public async Task<bool> UpdateUserRoleAsync(Guid userId, string newRole)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null) return false;
+            if (user == null) throw new NotFoundException("User not found.");
 
             if (!await _roleManager.RoleExistsAsync(newRole))
-                return false;
+                throw new BadRequestException("Role does not exist.");
 
             var currentRoles = await _userManager.GetRolesAsync(user);
             await _userManager.RemoveFromRolesAsync(user, currentRoles);

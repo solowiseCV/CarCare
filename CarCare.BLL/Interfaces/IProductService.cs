@@ -8,7 +8,7 @@ namespace CarCare.BLL.Interfaces
     public interface IProductService
     {
         Task<IEnumerable<ProductResponseDto>> GetProductsAsync();
-        Task<ProductResponseDto?> GetProductByIdAsync(Guid id);
+        Task<ProductResponseDto> GetProductByIdAsync(Guid id);
         Task<ProductResponseDto> CreateProductAsync(ProductRequestDto productDto);
         Task UpdateProductAsync(Guid id, ProductRequestDto productDto);
         Task DeleteProductAsync(Guid id);

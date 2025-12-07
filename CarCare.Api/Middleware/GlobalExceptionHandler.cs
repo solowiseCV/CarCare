@@ -1,3 +1,4 @@
+using CarCare.BLL.Exceptions;
 using System.Net;
 using System.Text.Json;
 
@@ -30,13 +31,35 @@ namespace CarCare.Api.Middleware
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            var response = new object();
 
-            var response = new
+            switch (exception)
             {
-                StatusCode = context.Response.StatusCode,
-                Message = "Internal Server Error. Please try again later."
-            };
+                case BadRequestException badRequestException:
+                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    response = new
+                    {
+                        StatusCode = context.Response.StatusCode,
+                        Message = badRequestException.Message
+                    };
+                    break;
+                case NotFoundException notFoundException:
+                    context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    response = new
+                    {
+                        StatusCode = context.Response.StatusCode,
+                        Message = notFoundException.Message
+                    };
+                    break;
+                default:
+                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    response = new
+                    {
+                        StatusCode = context.Response.StatusCode,
+                        Message = "Internal Server Error. Please try again later."
+                    };
+                    break;
+            }
 
             var jsonResponse = JsonSerializer.Serialize(response);
             return context.Response.WriteAsync(jsonResponse);

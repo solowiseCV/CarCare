@@ -12,7 +12,7 @@ namespace CarCare.BLL.Interfaces
     public interface IOrderService
     {
         Task<IEnumerable<OrderResponseDto>> GetOrdersAsync();
-        Task<OrderResponseDto?> GetOrderByIdAsync(Guid id);
+        Task<OrderResponseDto> GetOrderByIdAsync(Guid id);
         Task<OrderResponseDto> CreateOrderAsync(OrderRequestDto orderDto);
         Task UpdateOrderAsync(Guid id, OrderRequestDto orderDto);
         Task DeleteOrderAsync(Guid id);

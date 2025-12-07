@@ -1,4 +1,5 @@
 using AutoMapper;
+using CarCare.BLL.Exceptions;
 using CarCare.DTOs.Customer.RequestDto;
 using CarCare.DTOs.Customer.ResponseDto;
 using CarCare.Domain.Interfaces;
@@ -27,9 +28,13 @@ namespace CarCare.BLL.Services
             return _mapper.Map<IEnumerable<CustomerResponseDto>>(customers);
         }
 
-        public async Task<CustomerResponseDto?> GetCustomerByIdAsync(Guid id)
+        public async Task<CustomerResponseDto> GetCustomerByIdAsync(Guid id)
         {
             var customer = await _customerRepository.GetByIdAsync(id);
+            if (customer == null)
+            {
+                throw new NotFoundException("Customer not found.");
+            }
             return _mapper.Map<CustomerResponseDto>(customer);
         }
 
@@ -45,8 +50,7 @@ namespace CarCare.BLL.Services
             var customer = await _customerRepository.GetByIdAsync(id);
             if (customer == null)
             {
-               
-                return;
+                throw new NotFoundException("Customer not found.");
             }
 
             _mapper.Map(customerDto, customer);
@@ -58,8 +62,7 @@ namespace CarCare.BLL.Services
             var customer = await _customerRepository.GetByIdAsync(id);
             if (customer == null)
             {
-             
-                return;
+                throw new NotFoundException("Customer not found.");
             }
             await _customerRepository.DeleteAsync(customer);
         }

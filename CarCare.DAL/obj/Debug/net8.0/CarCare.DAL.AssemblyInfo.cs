@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CarCare.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbef76b7a3def94127af951dca94ad1bd308a625")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+574901569bd71a51d589a4edabc6c0e30ec18f34")]
 [assembly: System.Reflection.AssemblyProductAttribute("CarCare.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CarCare.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

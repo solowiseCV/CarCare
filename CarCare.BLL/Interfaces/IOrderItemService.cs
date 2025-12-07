@@ -11,7 +11,7 @@ namespace CarCare.BLL.Interfaces
 {
     public interface IOrderItemService
     {
-        Task<OrderItemResponseDto?> GetOrderItemByIdAsync(Guid id);
+        Task<OrderItemResponseDto> GetOrderItemByIdAsync(Guid orderId, Guid id);
         Task<OrderItemResponseDto> CreateOrderItemAsync(OrderItemRequestDto orderItemDto);
         Task UpdateOrderItemAsync(Guid id, OrderItemRequestDto orderItemDto);
         Task DeleteOrderItemAsync(Guid id);

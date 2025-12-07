@@ -21,14 +21,10 @@ namespace CarCare.API.Controllers
         [HttpGet("me")]
         public async Task<IActionResult> GetUserProfile()
         {
-            var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (userIdString == null) return Unauthorized();
+            var userId = GetUserId();
+            if (userId == null) return Unauthorized();
 
-            var userId = Guid.Parse(userIdString);
-            var userDto = await _userService.GetCurrentUserByIdAsync(userId);
-
-            if (userDto == null) return NotFound();
-
+            var userDto = await _userService.GetCurrentUserByIdAsync(userId.Value);
             return Ok(userDto);
         }
 
@@ -39,7 +35,6 @@ namespace CarCare.API.Controllers
             if (userId == null) return Unauthorized();
 
             await _userService.UpdateUserProfileAsync(userId.Value, dto);
-
             return Ok("Profile updated");
         }
 
@@ -51,7 +46,6 @@ namespace CarCare.API.Controllers
             if (userId == null) return Unauthorized();
 
             await _userService.DeleteUserByIdAsync(userId.Value);
-
             return Ok("Account deleted");
         }
 
@@ -60,10 +54,8 @@ namespace CarCare.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateUserRole(Guid userId, [FromQuery] string role)
         {
-            var result = await _userService.UpdateUserRoleAsync(userId, role);
-
-            return result ? Ok("Role updated")
-                          : BadRequest("Failed to update role");
+            await _userService.UpdateUserRoleAsync(userId, role);
+            return Ok("Role updated");
         }
 
         private Guid? GetUserId()

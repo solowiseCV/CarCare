@@ -1,4 +1,5 @@
 using AutoMapper;
+using CarCare.BLL.Exceptions;
 using CarCare.BLL.Interfaces;
 using CarCare.DTOs.Order.RequestDto;
 using CarCare.DTOs.Order.ResponseDto;
@@ -22,9 +23,13 @@ namespace CarCare.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<OrderItemResponseDto?> GetOrderItemByIdAsync(Guid id)
+        public async Task<OrderItemResponseDto> GetOrderItemByIdAsync(Guid orderId, Guid id)
         {
             var orderItem = await _orderItemRepository.GetByIdAsync(id);
+            if (orderItem == null || orderItem.OrderId != orderId)
+            {
+                throw new NotFoundException("Order item not found.");
+            }
             return _mapper.Map<OrderItemResponseDto>(orderItem);
         }
 
@@ -40,8 +45,7 @@ namespace CarCare.BLL.Services
             var orderItem = await _orderItemRepository.GetByIdAsync(id);
             if (orderItem == null)
             {
-              
-                return;
+                throw new NotFoundException("Order item not found.");
             }
 
             _mapper.Map(orderItemDto, orderItem);
@@ -53,8 +57,7 @@ namespace CarCare.BLL.Services
             var orderItem = await _orderItemRepository.GetByIdAsync(id);
             if (orderItem == null)
             {
-             
-                return;
+                throw new NotFoundException("Order item not found.");
             }
             await _orderItemRepository.DeleteAsync(orderItem);
         }

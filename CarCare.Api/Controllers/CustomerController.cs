@@ -34,10 +34,6 @@ namespace CarCare.Api.Controllers
         public async Task<IActionResult> GetCustomer(Guid id)
         {
             var customer = await _customerService.GetCustomerByIdAsync(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
             return Ok(customer);
         }
 
