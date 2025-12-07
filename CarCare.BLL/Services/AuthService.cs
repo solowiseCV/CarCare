@@ -4,8 +4,8 @@ using CarCare.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using CarCare.DAL.Entities;
 using Microsoft.Extensions.Configuration;
-using CarCare.Domain.Interfaces; // Added for IRepository interfaces
-using System.Linq; // Added for First() on errors
+using CarCare.Domain.Interfaces; 
+using System.Linq;
 
 namespace CarCare.BLL.Services
 {
@@ -16,27 +16,26 @@ namespace CarCare.BLL.Services
         private readonly IConfiguration _config;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ITokenService _tokenService;
-        private readonly ICustomerRepository _customerRepository; // Injected
-        private readonly ISupplierRepository _supplierRepository; // Injected
-        private readonly RoleManager<IdentityRole> _roleManager; // Injected to check role existence
-
+        private readonly ICustomerRepository _customerRepository;
+        private readonly ISupplierRepository _supplierRepository; 
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         public AuthService(UserManager<ApplicationUser> userManager,
                            IEmailService emailService,
                            IConfiguration config,
                            SignInManager<ApplicationUser> signInManager,
                            ITokenService tokenService,
-                           ICustomerRepository customerRepository, // Added
-                           ISupplierRepository supplierRepository, // Added
-                           RoleManager<IdentityRole> roleManager) // Added
+                           ICustomerRepository customerRepository, 
+                           ISupplierRepository supplierRepository, 
+                           RoleManager<IdentityRole<Guid>> roleManager) 
         {
             _userManager = userManager;
             _emailService = emailService;
             _config = config;
             _signInManager = signInManager;
             _tokenService = tokenService;
-            _customerRepository = customerRepository; // Assigned
-            _supplierRepository = supplierRepository; // Assigned
-            _roleManager = roleManager; // Assigned
+            _customerRepository = customerRepository; 
+            _supplierRepository = supplierRepository; 
+            _roleManager = roleManager;
         }
 
         public async Task<bool> SendEmailVerificationAsync(CarCare.Domain.Entities.User user)
@@ -85,14 +84,14 @@ namespace CarCare.BLL.Services
 
         public async Task<string> RegisterAsync(RegisterDto dto)
         {
-            // Validate chosen role
-            var allowedRoles = new[] { "Customer", "Supplier" }; // "Mechanic" if implemented
+           
+            var allowedRoles = new[] { "Customer", "Supplier" }; 
             if (!allowedRoles.Contains(dto.Role))
             {
                 throw new InvalidOperationException($"Invalid role specified. Allowed roles are: {string.Join(", ", allowedRoles)}.");
             }
 
-            // Ensure role exists in the system
+           
             if (!await _roleManager.RoleExistsAsync(dto.Role))
             {
                 throw new InvalidOperationException($"Role '{dto.Role}' does not exist in the system. Please contact administrator.");
@@ -123,10 +122,8 @@ namespace CarCare.BLL.Services
                     var supplier = new Supplier { UserId = applicationUser.Id, CompanyName = dto.Name }; // Assuming CompanyName can be initialized with user's name
                     await _supplierRepository.AddAsync(supplier);
                     break;
-                // case "Mechanic": // If Mechanic is added later
-                //    var mechanic = new Mechanic { UserId = applicationUser.Id };
-                //    await _mechanicRepository.AddAsync(mechanic);
-                //    break;
+                default:
+                    throw new InvalidOperationException("Unsupported role for profile creation.");
             }
 
 
